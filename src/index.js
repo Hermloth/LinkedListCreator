@@ -15,38 +15,45 @@ const LinkedListProto = {
         console.log(`Test Function Called on ${this.value}!`)
     },
 
-// Add First Element (Not working right)
-    AddFirstElement(value, next = null){
+// Add First Element
+    AddFirstElement(value, next = this.head){
         this.head = Object.create({
-            value: {
+            data: {
                 value: value,
                 next: next
             }
         })
-        this.size++;
+        this.size = this.size+1;
     },
 
-// Add Last Element
+// Add Last Element (Not yet working)
     AddLastElement(value){
-        let current;
+        var currentnode = this.head["data"]
         if (!this.head){
             this.head = Object.create({
-                value: {
+                data: {
                     value: value,
                     next: null
                 }
             })
         } else {
-            let node = Object.create({
+            let newnode = Object.create({
                 value: {
                     value: value,
                     next: null
                 }
+                
             })
-            //////// Currently adds next property to head, needs to add to last created object
-            this.head.next = node;
+            console.log("DEBUG " + currentnode.next)
+            //this.head["data"].next
+            while (currentnode.next){
+                currentnode = currentnode.next
+                console.log("DEBUG2" + currentnode.next)
+            }
+            currentnode.next = newnode
             this.size++;
         }
+        this.size = this.size+1;
     },
 // Return Size
     ReturnSize(){
@@ -80,7 +87,7 @@ const ll = LinkedList();
 
 ll.AddFirstElement(`TestObject1`);
 ll.AddFirstElement(`TestObject2`);
-//ll.AddLastElement(`TestObject3`);
+ll.AddLastElement(`TestObject3`);
 //console.log(ll);
 ll.returnlist();
 //const testVar = LinkedList(`TestObject`);
