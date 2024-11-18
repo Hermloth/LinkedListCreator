@@ -11,88 +11,128 @@ function LinkedList (){
 }
 
 const LinkedListProto = {
+
+// Return Head Node
+
+// Return Tail Node
+
+// Remove Last Element
+
+// Return Node at Index
+
+// Check if value exists (True / False)
+
+//find index of value that exists
+
+}
+
+
+function LinkedList2 (){
+    return Object.create(LinkedListProto2, {
+        list:{
+            head: null,
+            size: 0
+        }
+    })
+}
+
+const LinkedListProto2 = {
     testfunction (){
-        console.log(`Test Function Called on ${this.value}!`)
+        console.log(`Test Function Called on ${this.list}!`)
     },
 
 // Add First Element
     AddFirstElement(value, next = this.head){
         this.head = Object.create({
-            data: {
+            datapoint: {
                 value: value,
                 next: next
             }
         })
-        this.size = this.size+1;
-    },
+        if(this.size){
+            this.size = this.size + 1;
+        } else {
+            this.size = 1
+        }
+        },
 
-// Add Last Element (Not yet working)
+        // Add Last Element (Not yet working)
     AddLastElement(value){
-        var currentnode = this.head["data"]
-        if (!this.head){
+        console.log("Add Last Element Called");
+        let current;
+        let currentnode = this.head.datapoint;
+        console.log(currentnode);
+        console.log("------")
+        if (!currentnode){
             this.head = Object.create({
-                data: {
+                datapoint: {
                     value: value,
                     next: null
                 }
             })
         } else {
             let newnode = Object.create({
-                value: {
+                datapoint: {
                     value: value,
                     next: null
                 }
-                
             })
-            console.log("DEBUG " + currentnode.next)
-            //this.head["data"].next
-            while (currentnode.next){
-                currentnode = currentnode.next
-                console.log("DEBUG2" + currentnode.next)
+            while (currentnode.next?.datapoint){
+                currentnode = currentnode.next.datapoint;
             }
-            currentnode.next = newnode
-            this.size++;
+            currentnode.next = newnode;
+            //console.log("Last Element Add Test")
+            //console.log(currentnode.next.datapoint)
         }
-        this.size = this.size+1;
+        if(this.size){
+            this.size = this.size + 1;
+        } else {
+            this.size = 1
+        }
     },
-// Return Size
+    
+    // Return Size
     ReturnSize(){
-        console.log(this.size);
+        console.log(`Array Length: ${this.size}`);
     },
-// Return Head Node
 
-// Return Tail Node
+        // Return list Object as a String
+    returnlist(){
+        console.log("Return List Function Called");
+        let current = this.head.datapoint;
+        let itteration = 0
+        let finalOutputString = "";
+        //console.log(current.data.next);
+        while (current) {
+            //console.log("--------")
+            //console.log(`VALUE INPUT ${itteration}`)
+            //console.log(current.value);
+            if (finalOutputString == ""){
+                finalOutputString = `${itteration}: ${current.value}`
+            } else {
+                finalOutputString = finalOutputString + `, ${itteration}: ${current.value}`
+            }
 
-// Return Node at Index
+            //console.log(current.next?.datapoint);
+            current = current.next?.datapoint
+            itteration++;
+        }
+        
+        //console.log("Final output:");
+        console.log(finalOutputString);
 
-// Remove Last Element
-
-// Check if value exists (True / False)
-
-//find index of value that exists
-
-// Return list Object as a String
-    returnlist (){
-        let current = this.head;
-/*        while (current) {
-            console.log(current.value);
-            console.log(current.next);
-        }        
-  */      
-        console.log(this);
+        //console.log(this);
     }
-}
 
-const ll = LinkedList();
+    }
 
-ll.AddFirstElement(`TestObject1`);
-ll.AddFirstElement(`TestObject2`);
-ll.AddLastElement(`TestObject3`);
-//console.log(ll);
-ll.returnlist();
-//const testVar = LinkedList(`TestObject`);
-//testVar.returnlist();
-//console.log(testVar)
-
-
-
+    // Manual Tests
+    const ll2 = LinkedList2();
+    ll2.AddFirstElement("TestValue3")
+    ll2.AddFirstElement("TestValue2")
+    ll2.AddFirstElement("TestValue1")
+    ll2.AddLastElement("TestValue4")
+    ll2.returnlist();
+    ll2.ReturnSize();
+    //console.log(ll2.head)
+    //console.log(ll2)
